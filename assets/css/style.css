@@ -2,12 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 :root {
     --primary-color: #FFCD42;
     --secondary-color: #0056b3;
 }
 nav{
+    position: sticky;
+    top: 0;
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -25,30 +28,42 @@ ul{
 }
 a{
     text-decoration: none;
+    color: black;
 }
 header{
     display: flex;
     flex-direction: row;
     justify-content: right;
     align-items: center;
-    background-image: url(header.png);
+    background-image: url(../img/header.png);
     height: 90vh;
     background-size: cover;
 }
 header div {
     display: flex;
     flex-direction: column;
-    margin: 10vw;
+    margin: 20vw;
     width: 30vw;
     gap: 25px;
 }
 h1{
     font-size: 50px;
 }
-header a{
+header button{
     color: black;
     background-color: var(--primary-color);
     padding: 15px;
     border-radius: 5px;
     width: 170px;
+    border: none;
+    font-weight: bold;
+}
+main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.aliment-card{
+    width: 300px;
+    border: ;
 }

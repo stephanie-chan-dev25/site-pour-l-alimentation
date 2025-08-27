@@ -18,7 +18,7 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <nav>
@@ -33,10 +33,10 @@ if ($conn->connect_error) {
         <div>
             <h1>Mangez sain et dépensez moins</h1>
             <p>Choisissez un aliment pour regarder ses valeurs nutritionnelles et son prix</p>
-            <a href="">Remplir le panier</a>
+            <button onclick="document.getElementById('bas').scrollIntoView({behavior: 'smooth'});">Remplir le panier</button>
         </div>
     </header>
-    <main>
+    <main id="bas">
         <?php
         // Exemple de requête
         $sql = "SELECT * FROM aliment";
@@ -48,7 +48,7 @@ if ($conn->connect_error) {
         // Utiliser foreach
         foreach ($rows as $row) {
         ?>
-        <div>
+        <div class="aliment-card">
             <img src="<?php echo $row["id"];?>" alt="">
             <p><?php echo $row["nom"];?></p>
             <p><?php echo $row["qtt"];?></p>
