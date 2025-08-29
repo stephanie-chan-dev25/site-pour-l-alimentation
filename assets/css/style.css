@@ -19,6 +19,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     height: 8vh;
+    width: 100vw;
 }
 
 ul {

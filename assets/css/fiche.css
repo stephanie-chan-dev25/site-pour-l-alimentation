@@ -1,0 +1,42 @@
+.body-fiche {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 100px;
+    background-color: #F5F5F5;
+    align-items: center;
+}
+
+.back {
+    position: fixed;
+    top: 10vh;
+    left: 25px;
+}
+
+.main-img {
+    width: 30vw;
+    height: 30vh;
+}
+
+.nutrients-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.nutrients-sub-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 20vw;
+}
+.nutrients-sub-content-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;    
+}
+.nutrients{
+    width: 40vw;
+}

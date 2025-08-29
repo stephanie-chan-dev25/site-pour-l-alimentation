@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <nav>
-        <h2>4ever</h2>
+<nav>
+    <h2>4ever</h2>
         <ul>
-            <li><a href="">Accueil</a></li>
-            <li><a href="panier.php">Panier</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="page/panier.php">Panier</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-    </nav>
+</nav>
     <header>
         <div>
             <h1>Mangez sain et dépensez moins</h1>
@@ -34,7 +34,7 @@
         foreach ($rows as $row) {
         ?>
         <div href class="aliment-card">
-            <a href="page/fiche.php?id=<?php echo $row["id"];?>"><img class="aliment-img" src="assets/img/carotte.png" alt="aliment"></a>
+            <a href="page/fiche.php?id=<?php echo $row["id"];?>"><img class="aliment-img" src="assets/img/<?php echo $row["id"];?>.png" alt="aliment"></a>
             <p><?php echo $row["nom"];?></p>
             <p><?php echo $row["qtt"];?></p>
             <div class="bag-content">
