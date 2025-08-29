@@ -1,23 +1,10 @@
-<?php
-$host = "localhost";
-$user = "root";
-$pass = "2032";
-$dbname = "my_db";
-
-// Connexion
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("❌ Connexion échouée : " . $conn->connect_error);
-}
-?>
+<?php include("page/connexion.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Site pour l'alimentation</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -38,23 +25,21 @@ if ($conn->connect_error) {
     </header>
     <main id="bas">
         <?php
-        // Exemple de requête
         $sql = "SELECT * FROM aliment";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
         // Transformer le résultat en tableau
         $rows = $result->fetch_all(MYSQLI_ASSOC);
-        // Utiliser foreach
         foreach ($rows as $row) {
         ?>
-        <div class="aliment-card">
-            <img src="<?php echo $row["id"];?>" alt="">
+        <div href class="aliment-card">
+            <a href="page/fiche.php?id=<?php echo $row["id"];?>"><img class="aliment-img" src="assets/img/carotte.png" alt="aliment"></a>
             <p><?php echo $row["nom"];?></p>
             <p><?php echo $row["qtt"];?></p>
-            <div>
+            <div class="bag-content">
                 <p><?php echo $row["prix"];?></p>
-                <a href=""></a>
+                <a href=""><img src="assets/img/sac-de-courses.png" alt="sac"></a>
             </div>
         </div>
         <?php

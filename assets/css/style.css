@@ -1,14 +1,16 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 :root {
     --primary-color: #FFCD42;
     --secondary-color: #0056b3;
 }
-nav{
+
+nav {
     position: sticky;
     top: 0;
     background-color: white;
@@ -18,7 +20,8 @@ nav{
     align-items: center;
     height: 8vh;
 }
-ul{
+
+ul {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -26,11 +29,13 @@ ul{
     width: 40vw;
     list-style-type: none;
 }
-a{
+
+a {
     text-decoration: none;
     color: black;
 }
-header{
+
+header {
     display: flex;
     flex-direction: row;
     justify-content: right;
@@ -39,6 +44,7 @@ header{
     height: 90vh;
     background-size: cover;
 }
+
 header div {
     display: flex;
     flex-direction: column;
@@ -46,10 +52,12 @@ header div {
     width: 30vw;
     gap: 25px;
 }
-h1{
+
+h1 {
     font-size: 50px;
 }
-header button{
+
+header button {
     color: black;
     background-color: var(--primary-color);
     padding: 15px;
@@ -58,12 +66,37 @@ header button{
     border: none;
     font-weight: bold;
 }
-main{
+
+main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
 }
-.aliment-card{
+
+.aliment-card {
     width: 300px;
-    border: ;
+    height: 500px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 50px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.aliment-img{
+    width: 100%;
+}
+.bag-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.bag-content img{
+    width: 50px;
+    height: 50px;
 }
