@@ -15,10 +15,12 @@ $row = $result->fetch_assoc()
     <title>Fiche - Ever</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/fiche.css">
+    <script src="../assets/js/script.js" defer=""></script>
 </head>
 <body class="content">
 <nav>
 <img src="../assets/img/logo.svg" alt="Ever">
+<img class="hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
         <ul>
             <li><a href="../index.php">Accueil</a></li>
             <li><a href="panier.php">Panier</a></li>
