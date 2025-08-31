@@ -12,21 +12,21 @@ $row = $result->fetch_assoc()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de l'aliment</title>
+    <title>Fiche - Ever</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/fiche.css">
 </head>
-<body class="body-fiche">
+<body class="content">
 <nav>
-    <h2>4ever</h2>
+<img src="../assets/img/logo.svg" alt="Ever">
         <ul>
             <li><a href="../index.php">Accueil</a></li>
             <li><a href="panier.php">Panier</a></li>
-            <li><a href="../index.php">Contact</a></li>
+            <li><a href="../index.php#contact">Contact</a></li>
         </ul>
 </nav>
-    <a class="back" href="../index.php"><</a>
-    <img class="main-img" src="../assets/img/<?php echo $id;?>.png" alt="">
+    <a class="back" href="../index.php"><-</a>
+    <img class="main-img" src="../assets/img/<?php echo $id;?>.png" alt="<?php echo $row["nom"]?>">
 <div class="nutrients-content">
     <h1><?php echo $row["nom"]?></h1>
     <div class="nutrients-sub-content">

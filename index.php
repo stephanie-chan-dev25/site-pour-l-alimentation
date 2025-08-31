@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site pour l'alimentation</title>
+    <title>Accueil - Ever</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <nav>
-    <h2>4ever</h2>
+    <img src="assets/img/logo.svg" alt="Ever">
         <ul>
             <li><a href="#">Accueil</a></li>
             <li><a href="page/panier.php">Panier</a></li>
@@ -20,26 +20,24 @@
         <div>
             <h1>Mangez sain et dépensez moins</h1>
             <p>Choisissez un aliment pour regarder ses valeurs nutritionnelles et son prix</p>
-            <button onclick="document.getElementById('bas').scrollIntoView({behavior: 'smooth'});">Remplir le panier</button>
+            <button onclick="document.getElementById('down').scrollIntoView({behavior: 'smooth'});">Remplir le panier</button>
         </div>
     </header>
-    <main id="bas">
+    <main id="down">
         <?php
         $sql = "SELECT * FROM aliment";
         $result = $conn->query($sql);
-
         if ($result->num_rows > 0) {
-        // Transformer le résultat en tableau
         $rows = $result->fetch_all(MYSQLI_ASSOC);
         foreach ($rows as $row) {
         ?>
         <div href class="aliment-card">
-            <a href="page/fiche.php?id=<?php echo $row["id"];?>"><img class="aliment-img" src="assets/img/<?php echo $row["id"];?>.png" alt="aliment"></a>
+            <a href="page/fiche.php?id=<?php echo $row["id"];?>"><img class="aliment-img" src="assets/img/<?php echo $row["id"];?>.png" alt="<?php echo $row["nom"];?>"></a>
             <p><?php echo $row["nom"];?></p>
-            <p><?php echo $row["qtt"];?></p>
+            <p><?php echo $row["qtt"];?> kg</p>
             <div class="bag-content">
-                <p><?php echo $row["prix"];?></p>
-                <a href=""><img src="assets/img/sac-de-courses.png" alt="sac"></a>
+                <p><?php echo $row["prix"];?> MGA</p>
+                <a href="page/traitement.php?id=<?php echo $row["id"];?>"><img src="assets/img/sac-de-courses.png" alt="sac"></a>
             </div>
         </div>
         <?php
@@ -50,6 +48,6 @@
 $conn->close();
         ?>
     </main>
-    <footer></footer>
+    <footer id="contact"></footer>
 </body>
 </html>

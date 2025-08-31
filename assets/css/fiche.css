@@ -1,9 +1,9 @@
-.body-fiche {
+.content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 100px;
-    background-color: #F5F5F5;
+    background-color: var(--tertiary-color);
     align-items: center;
 }
 
@@ -11,6 +11,8 @@
     position: fixed;
     top: 10vh;
     left: 25px;
+    text-decoration: none;
+    color: black;
 }
 
 .main-img {
@@ -29,14 +31,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 20vw;
+    width: 300px;
 }
-.nutrients-sub-content-2{
+
+.nutrients-sub-content-2 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 50px;    
+    gap: 50px;
+    margin-bottom: 50px;
 }
-.nutrients{
-    width: 40vw;
+
+.nutrients {
+    width: 300px;
 }
