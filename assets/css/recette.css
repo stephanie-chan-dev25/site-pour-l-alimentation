@@ -1,0 +1,29 @@
+body {
+    background-color: var(--tertiary-color);
+}
+
+input[type="text"] {
+    border: 1px solid grey;
+    padding: 15px 20px;
+    width: 300px;
+    font-size: 14px;
+    border-radius: 25px;
+}
+input[type="submit"]{
+    display: none;
+}
+
+main {
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.content-recipe-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+}

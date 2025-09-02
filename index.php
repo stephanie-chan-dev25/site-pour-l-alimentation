@@ -11,11 +11,13 @@
 <body>
 <nav>
     <img src="assets/img/logo.svg" alt="Ever">
-    <img class="hamburger" src="assets/icon/bars-solid-full.svg" alt="menu hamburger">
+    <img class="black-hamburger" src="assets/icon/bars-solid-full.svg" alt="menu hamburger">
+    <img class="green-hamburger" src="assets/icon/hamburger-vert.svg" alt="menu hamburger">
         <ul>
             <li><a href="#">Accueil</a></li>
+            <li><a href="page/recette.php">Recettes</a></li>
             <li><a href="page/panier.php">Panier</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Contacts</a></li>
         </ul>
 </nav>
     <header>
@@ -39,7 +41,7 @@
             <p><?php echo $row["qtt"];?> kg</p>
             <div class="bag-content">
                 <p><?php echo $row["prix"];?> MGA</p>
-                <a href="page/traitement.php?id=<?php echo $row["id"];?>"><img src="assets/img/sac-de-courses.png" alt="sac"></a>
+                <a href="page/ajout.php?id=<?php echo $row["id"];?>"><img src="assets/img/sac-de-courses.png" alt="sac"></a>
             </div>
         </div>
         <?php

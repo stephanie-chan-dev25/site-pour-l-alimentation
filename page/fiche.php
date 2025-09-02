@@ -19,15 +19,20 @@ $row = $result->fetch_assoc()
 </head>
 <body class="content">
 <nav>
-<img src="../assets/img/logo.svg" alt="Ever">
-<img class="hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
+    <img src="../assets/img/logo.svg" alt="Ever">
+    <img class="black-hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
+    <img class="green-hamburger" src="../assets/icon/hamburger-vert.svg" alt="menu hamburger">
         <ul>
             <li><a href="../index.php">Accueil</a></li>
+            <li><a href="recette.php">Recettes</a></li>
             <li><a href="panier.php">Panier</a></li>
-            <li><a href="../index.php#contact">Contact</a></li>
+            <li><a href="../index.php#contact">Contacts</a></li>
         </ul>
 </nav>
-    <a class="back" href="../index.php"><-</a>
+    <a class="back" href="../index.php">
+        <img class="black-back" src="../assets/icon/arrow-left-solid-full.svg" alt="flèche">
+        <img class="green-back" src="../assets/icon/fleche-vert.svg" alt="flèche">
+    </a>
     <img class="main-img" src="../assets/img/<?php echo $id;?>.png" alt="<?php echo $row["nom"]?>">
 <div class="nutrients-content">
     <h1><?php echo $row["nom"]?></h1>
@@ -49,7 +54,7 @@ $row = $result->fetch_assoc()
         ?>
             <div class="nutrients">
                 <p><?php echo $row2['nutriment'];?></p>
-                <p><?php echo $row2['qtt'];?></p>
+                <p><?php echo $row2['qtt'];?> g</p>
             </div>
         <?php
             }

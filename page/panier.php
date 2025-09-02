@@ -13,12 +13,14 @@ session_start();
 </head>
 <body>
 <nav>
-<img src="../assets/img/logo.svg" alt="Ever">
-<img class="hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
+    <img src="../assets/img/logo.svg" alt="Ever">
+    <img class="black-hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
+    <img class="green-hamburger" src="../assets/icon/hamburger-vert.svg" alt="menu hamburger">
         <ul>
             <li><a href="../index.php">Accueil</a></li>
-            <li><a href="panier.php">Panier</a></li>
-            <li><a href="../index.php#contact">Contact</a></li>
+            <li><a href="recette.php">Recettes</a></li>
+            <li><a href="#">Panier</a></li>
+            <li><a href="../index.php#contact">Contacts</a></li>
         </ul>
 </nav>
 <main>

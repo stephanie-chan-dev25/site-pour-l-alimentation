@@ -23,8 +23,8 @@ nav {
     width: 100vw;
 }
 
-.hamburger{
-    display: none;
+.black-hamburger,
+.green-hamburger {
     cursor: pointer;
 }
 
@@ -119,17 +119,13 @@ main {
     height: 50px;
 }
 
-@media (max-width: 500px){
-    .hamburger{
-        display: block;
-    }
-
-    nav ul{
+@media (max-width: 500px) {
+    ul {
         display: none;
         flex-direction: column;
     }
 
-    .active{
+    .active {
         display: flex;
     }
 }
