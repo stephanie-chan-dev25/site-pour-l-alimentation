@@ -17,10 +17,10 @@ session_start();
     <img class="black-hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
     <img class="green-hamburger" src="../assets/icon/hamburger-vert.svg" alt="menu hamburger">
         <ul>
-            <li><a href="../index.php">Accueil</a></li>
-            <li><a href="recette.php">Recettes</a></li>
-            <li><a href="#">Panier</a></li>
-            <li><a href="../index.php#contact">Contacts</a></li>
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="recette.php">RECIPES</a></li>
+            <li><a href="#">BASKET</a></li>
+            <li><a href="../index.php#contact">CONTACTS</a></li>
         </ul>
 </nav>
 <main>
@@ -31,7 +31,7 @@ session_start();
         ?>
         <div href class="aliment-card">
             <a href="fiche.php?id=<?php echo $_SESSION["ids"][$i]?>"><img class="aliment-img" src="../assets/img/<?php echo $_SESSION["ids"][$i];?>.png" alt="<?php echo $row["nom"];?></"></a>
-            <p><?php echo $_SESSION["noms"][$i];?></p>
+            <p class="aliment-card-name"><?php echo $_SESSION["noms"][$i];?></p>
             <p><?php echo $_SESSION["qtts"][$i];?> kg</p>
             <div class="bag-content">
                 <p><?php echo $_SESSION["prix"][$i];?> MGA</p>
@@ -42,7 +42,7 @@ session_start();
         }
         ?>
         </div>
-        <a href="vider.php" class="btn">Vider le panier</a>
+        <a href="vider.php" class="btn">EMPTY THE BASKET</a>
     </main>
 </body>
 </html>

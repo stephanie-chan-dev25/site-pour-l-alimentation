@@ -23,10 +23,10 @@ $row = $result->fetch_assoc()
     <img class="black-hamburger" src="../assets/icon/bars-solid-full.svg" alt="menu hamburger">
     <img class="green-hamburger" src="../assets/icon/hamburger-vert.svg" alt="menu hamburger">
         <ul>
-            <li><a href="../index.php">Accueil</a></li>
-            <li><a href="recette.php">Recettes</a></li>
-            <li><a href="panier.php">Panier</a></li>
-            <li><a href="../index.php#contact">Contacts</a></li>
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="recette.php">RECIPES</a></li>
+            <li><a href="panier.php">BASKET</a></li>
+            <li><a href="../index.php#contact">CONTACTS</a></li>
         </ul>
 </nav>
     <a class="back" href="../index.php">
