@@ -2,7 +2,7 @@ const blackHamburger = document.querySelector(".black-hamburger");
 const greenHamburger = document.querySelector(".green-hamburger");
 const menu = document.querySelector("ul");
 function hamburgerOnHover() {
-    if (window.innerWidth <= 500) {
+    if (window.innerWidth <= 800) {
       blackHamburger.style.display = "block";
       greenHamburger.style.display = "none";
   

@@ -59,8 +59,8 @@ header {
 header div {
     display: flex;
     flex-direction: column;
-    margin-right: 20vw;
-    width: 30vw;
+    margin-right: 7vw;
+    width: 33vw;
     gap: 25px;
 }
 
@@ -82,7 +82,8 @@ button:hover {
     color: var(--primary-color);
     background-color: white;
 }
-main{
+
+main {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -91,6 +92,12 @@ main{
     align-items: center;
     padding: 100px 0;
 }
+
+.conteneur{
+    display: flex;
+    flex-direction: column;
+}
+
 .content-aliment-card {
     display: flex;
     flex-direction: row;
@@ -117,7 +124,7 @@ main{
     height: 200px;
 }
 
-.aliment-card-name{
+.aliment-card-name {
     font-weight: bold;
 }
 
@@ -127,7 +134,7 @@ main{
     justify-content: space-between;
 }
 
-.bag-content p{
+.bag-content p {
     font-weight: bold;
     color: var(--secondary-color);
 }
@@ -137,22 +144,32 @@ main{
     height: 50px;
 }
 
-footer{
-    background-color: var(--primary-color);
-    padding: 50px;
+footer {
+    background-color: #FFCD42;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 50px;
     justify-content: center;
+    padding: 50px;
     align-items: center;
     color: white;
 }
 
-footer div{
+footer div {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 25px;
+    align-items: center;
 }
-@media (max-width: 500px) {
+
+@media (max-width: 800px) {
+    header{
+        background-image: url(../img/en-tête-2.png);
+    }
+    header div {
+        width: 70vw;
+        
+    }
     ul {
         display: none;
         flex-direction: column;
@@ -160,5 +177,8 @@ footer div{
 
     .active {
         display: flex;
+    }
+    footer{
+        flex-direction: column;
     }
 }
