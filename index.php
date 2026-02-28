@@ -39,138 +39,103 @@
             <input type="submit" value="Valider">
         </form>
         <?php
-        // --------- PARAMÈTRES GÉNÉRAUX ---------
-        $limit = 1; // nombre d’éléments par page
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        if ($page < 1) $page = 1;
+        function isMobileDevice(): bool {
+            $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+            return (bool) preg_match('/Android|iPhone|iPad|iPod|IEMobile|Opera Mini|Mobile/i', $userAgent);
+        }
+
+        function buildPaginationUrl(int $targetPage, string $search = ''): string {
+            $params = ['page' => $targetPage];
+            if ($search !== '') {
+                $params['aliment'] = $search;
+            }
+            return '?' . http_build_query($params);
+        }
+
+        $limit = isMobileDevice() ? 1 : 3;
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $search = isset($_GET['aliment']) ? trim($_GET['aliment']) : '';
+        $isSearch = $search !== '';
+
+        if ($isSearch) {
+            $countStmt = $conn->prepare("SELECT COUNT(*) AS total FROM aliment WHERE nom = ?");
+            $countStmt->bind_param("s", $search);
+            $countStmt->execute();
+            $countResult = $countStmt->get_result();
+            $total = (int) ($countResult->fetch_assoc()['total'] ?? 0);
+            $countStmt->close();
+        } else {
+            $totalResult = $conn->query("SELECT COUNT(*) AS total FROM aliment");
+            $total = (int) ($totalResult->fetch_assoc()['total'] ?? 0);
+        }
+
+        $totalPages = max(1, (int) ceil($total / $limit));
+        if ($page > $totalPages) {
+            $page = $totalPages;
+        }
         $offset = ($page - 1) * $limit;
 
-        if (isset($_GET["aliment"]) && $_GET["aliment"] !== "") {
-            // --------- RECHERCHE AVEC PAGINATION ---------
-            $nom = $_GET["aliment"];
-
-            // Compter les résultats correspondants
-            $sqlCount = $conn->prepare("SELECT COUNT(*) as total FROM aliment WHERE nom = ?");
-            $sqlCount->bind_param("s", $nom);
-            $sqlCount->execute();
-            $countResult = $sqlCount->get_result();
-            $countRow = $countResult->fetch_assoc();
-            $total = (int)$countRow['total'];
-            $totalPages = ceil($total / $limit);
-
-            // Sélection des résultats paginés
-            $sql2 = $conn->prepare("SELECT * FROM aliment WHERE nom = ? LIMIT ? OFFSET ?");
-            $sql2->bind_param("sii", $nom, $limit, $offset);
-            $sql2->execute();    
-            $result2 = $sql2->get_result();
+        if ($isSearch) {
+            $dataStmt = $conn->prepare("SELECT * FROM aliment WHERE nom = ? LIMIT ? OFFSET ?");
+            $dataStmt->bind_param("sii", $search, $limit, $offset);
+            $dataStmt->execute();
+            $result = $dataStmt->get_result();
+        } else {
+            $dataStmt = $conn->prepare("SELECT * FROM aliment LIMIT ? OFFSET ?");
+            $dataStmt->bind_param("ii", $limit, $offset);
+            $dataStmt->execute();
+            $result = $dataStmt->get_result();
+        }
         ?>
         <div class="conteneur">
             <div class="content-aliment-card">
-                <?php
-                if ($result2->num_rows > 0) {
-                    while ($rows2 = $result2->fetch_assoc()) {
-                ?>
-                <div class="aliment-card">
-                    <a href="page/fiche.php?id=<?php echo $rows2["id"];?>">
-                        <img class="aliment-img" src="assets/img/<?php echo $rows2["id"];?>.png" alt="<?php echo $rows2["nom"];?>">
-                    </a>
-                    <p class="aliment-card-name"><?php echo $rows2["nom"];?></p>
-                    <p><?php echo $rows2["qtt"];?> kg</p>
-                    <div class="bag-content">
-                        <p><?php echo $rows2["prix"];?> MGA</p>
-                        <a href="page/ajout.php?id=<?php echo $rows2["id"];?>"><img src="assets/img/sac-de-courses.png" alt="sac"></a>
-                    </div>
-                </div>
-                <?php
-                        }
-                ?>
+                <?php if ($result->num_rows > 0): ?>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <div class="aliment-card">
+                            <a href="page/fiche.php?id=<?php echo $row["id"]; ?>">
+                                <img class="aliment-img" src="assets/img/<?php echo $row["id"]; ?>.png" alt="<?php echo $row["nom"]; ?>">
+                            </a>
+                            <p class="aliment-card-name"><?php echo $row["nom"]; ?></p>
+                            <p><?php echo $row["qtt"]; ?> kg</p>
+                            <div class="bag-content">
+                                <p><?php echo $row["prix"]; ?> MGA</p>
+                                <a href="page/ajout.php?id=<?php echo $row["id"]; ?>"><img src="assets/img/sac-de-courses.png" alt="sac"></a>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>⚠ Aucun résultat.</p>
+                <?php endif; ?>
             </div>
-            <?php
-                    // Liens pagination pour recherche
-                    if ($totalPages > 1) {
-                        echo '<div class="pagination">';
-                        if ($page > 1) {
-                            echo '<a href="?aliment='.urlencode($nom).'&page='.($page-1).'">⬅ Précédent</a> ';
-                        }
-                        for ($i=1; $i<=$totalPages; $i++) {
-                            if ($i == $page) {
-                                echo "<strong>$i</strong> ";
-                            } else {
-                                echo '<a href="?aliment='.urlencode($nom).'&page='.$i.'">'.$i.'</a> ';
-                            }
-                        }
-                        if ($page < $totalPages) {
-                            echo '<a href="?aliment='.urlencode($nom).'&page='.($page+1).'">Suivant ➡</a>';
-                        }
-                        echo '</div>';
-                    }
-                } else {
-                    echo "⚠ Aucun résultat.";
-                }
-            ?>
+
+            <?php if ($totalPages > 1): ?>
+                <div class="pagination">
+                    <?php if ($page > 1): ?>
+                        <a class="pagination-link" href="<?php echo buildPaginationUrl($page - 1, $search); ?>">PRECEDENT</a>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <?php if ($i === $page): ?>
+                            <span class="pagination-current"><?php echo $i; ?></span>
+                        <?php else: ?>
+                            <a class="pagination-link" href="<?php echo buildPaginationUrl($i, $search); ?>"><?php echo $i; ?></a>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+
+                    <?php if ($page < $totalPages): ?>
+                        <a class="pagination-link" href="<?php echo buildPaginationUrl($page + 1, $search); ?>">SUIVANT</a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
         <?php
-        }else {
-            // --------- LISTE GÉNÉRALE AVEC PAGINATION ---------
-            // Compter le total
-            $totalResult = $conn->query("SELECT COUNT(*) as total FROM aliment");
-            $totalRow = $totalResult->fetch_assoc();
-            $total = (int)$totalRow['total'];
-            $totalPages = ceil($total / $limit);
-
-            // Sélection page courante
-            $sql = "SELECT * FROM aliment LIMIT $limit OFFSET $offset";
-            $result = $conn->query($sql);
+        $dataStmt->close();
+        $conn->close();
         ?>
-        <div class="conteneur">
-            <div class="content-aliment-card">
-            <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-            ?>
-                <div class="aliment-card">
-                    <a href="page/fiche.php?id=<?php echo $row["id"];?>">
-                        <img class="aliment-img" src="assets/img/<?php echo $row["id"];?>.png" alt="<?php echo $row["nom"];?>">
-                    </a>
-                    <p class="aliment-card-name"><?php echo $row["nom"];?></p>
-                    <p><?php echo $row["qtt"];?> kg</p>
-                    <div class="bag-content">
-                        <p><?php echo $row["prix"];?> MGA</p>
-                        <a href="page/ajout.php?id=<?php echo $row["id"];?>"><img src="assets/img/sac-de-courses.png" alt="sac"></a>
-                    </div>
-                </div>
-                <?php
-                    }
-                ?>
-            </div>
-    <?php
-            
-        } else {
-            echo "⚠ Aucun résultat.";
-        }
-
-        // Liens pagination générale
-        if ($totalPages > 1) {
-            echo '<div class="pagination">';
-            if ($page > 1) {
-                echo '<a href="?page='.($page-1).'">⬅ Précédent</a> ';
-            }
-            for ($i=1; $i<=$totalPages; $i++) {
-                if ($i == $page) {
-                    echo "<strong>$i</strong> ";
-                } else {
-                    echo '<a href="?page='.$i.'">'.$i.'</a> ';
-                }
-            }
-            if ($page < $totalPages) {
-                echo '<a href="?page='.($page+1).'">Suivant ➡</a>';
-            }
-            echo '</div>';
-        }
-    }
-    $conn->close();
-    ?>
-    </div>
     </main>
 <footer id="contact">
     <div>

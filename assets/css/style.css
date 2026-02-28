@@ -217,3 +217,41 @@ footer div {
         flex-direction: column;
     }
 }
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 40px;
+}
+
+.pagination-link,
+.pagination-current {
+    min-width: 42px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    font-weight: bold;
+    text-align: center;
+}
+
+.pagination-link {
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: black;
+    transition: 0.2s ease;
+}
+
+.pagination-link:hover {
+    background-color: white;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.pagination-current {
+    background-color: white;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
